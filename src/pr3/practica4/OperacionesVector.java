@@ -6,8 +6,10 @@ public class OperacionesVector {
 
     static void buscaMenores(Vector vector, float valor) {
 
-        vector.setPosicion(buscaMenoresRec(vector.dameArray(), 0, vector.dameTamaño() - 1, valor));
-        vector.obtenerMenoresOrdenado();
+        vector.establecerPosicion(buscaMenoresRec(vector.dameArray(), 0, vector.dameTamaño() - 1, valor));
+        vector.establecerMenoresOrdenado(obtenerMenoresOrdenado(vector));
+        
+        mostrarResultadoDivision(vector.dameArray(), vector.damePosicion());
 
     }
 
@@ -86,10 +88,44 @@ public class OperacionesVector {
 
     }
 
-    static boolean estaContenido(Vector vector, float numero) {
-        return vector.contiene(numero);
+    private static float[] obtenerMenoresOrdenado(Vector vector) {
+        float[] resultado = new float[vector.damePosicion()];
+        float[] aux = vector.dameArray();
+        for (int i = 0; i < resultado.length; i++) {
+            resultado[i] = aux[i];
+        }
+        divintern(resultado, 0, resultado.length-1);
+        return resultado;
     }
-
+    
+    private static void divintern(float[] vec, int linf, int lsup) {
+        if (linf < lsup-1) {
+            int[] posiciones = Division(vec, linf, lsup);
+            divintern(vec, linf, posiciones[0]);
+            divintern(vec, posiciones[1], lsup);
+        } else if(lsup-linf == 1) {
+            if (vec[lsup] < vec[linf]) {
+                float aux = vec[lsup];
+                vec[lsup] = vec[linf];
+                vec[linf] = aux;
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -115,7 +151,7 @@ public class OperacionesVector {
         System.out.println("Comprobar menores: (PIVOTE = " + pivote + ")");
 
         for (int i = 0; i < pivote; i++) {
-            if (vector[i] > vector[pivote + 1]) {
+            if (vector[i] > vector[pivote]) {
                 error = true;
                 System.out.println("Problema en la posición (" + i + ").");
             }
@@ -138,4 +174,6 @@ public class OperacionesVector {
         System.out.println("____________________________________");
 
     }
+
+    
 }

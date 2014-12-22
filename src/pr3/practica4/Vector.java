@@ -10,8 +10,12 @@ public class Vector {
         v = vector;
     }
     
-    void setPosicion(int posicion) {
+    void establecerPosicion(int posicion) {
         this.posicion = posicion;
+    }
+    
+    void establecerMenoresOrdenado(float[] vector) {
+        menoresOrdenado = vector;
     }
     
     public int dameTamaño() {
@@ -45,16 +49,11 @@ public class Vector {
     
     private void mostrarVector(float[] vector, int lsup) {
         for (int i = 0; i < lsup; i++) {
-            if (i < lsup -1) System.out.println(vector[i] + ", ");
+            if (i < lsup -1) System.out.print(vector[i] + ", ");
             else System.out.println(vector[i]);
         }
     }
 
-    public void obtenerMenoresOrdenado() {
-        float[] menores = new float[posicion];
-        for (int i = 0; i < menores.length; i++) {
-            menores[i] = v[i];
-        }
-        menoresOrdenado = menores;
-    }
+
+    
 }
